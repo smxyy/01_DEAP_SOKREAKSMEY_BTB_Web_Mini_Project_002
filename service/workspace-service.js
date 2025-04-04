@@ -69,7 +69,7 @@ export async function getWorkspaceById({ workspaceId }){
       }
     });
     const data = (await res).json();
-    console.log("data in getWorkspaceById:", data);
+    // console.log("data in getWorkspaceById:", data);
     return data;
   } catch (error){
     console.error("Error getting workspace by id: ", error);

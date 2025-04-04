@@ -1,6 +1,9 @@
 export async function registerService ({ username, email, password}){
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const res = fetch(`${BASE_URL}/register`, {
+  console.log("email:", email);
+  console.log("pass:",password);
+  console.log("username:", username);
+  const res = fetch(`${BASE_URL}/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

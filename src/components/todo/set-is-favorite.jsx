@@ -8,7 +8,7 @@ import { patchWorkspaceFavoriteAction } from "../../../actions/workspace-actions
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-export default function SetIsFavorite(){
+export default function SetIsFavorite({wid}){
   const [isFavorite, setIsFavorite] = useState(false);
   const handleToggle = () => {
     setIsFavorite((prev) => !prev); 
@@ -18,6 +18,11 @@ export default function SetIsFavorite(){
        <form 
           action = {patchWorkspaceFavoriteAction}
           className="space-y-6 bg-white">
+            <Input 
+              type="hidden"
+              name="id"
+              value={wid}
+            />
             <Input 
               type="hidden"
               name="favorite"

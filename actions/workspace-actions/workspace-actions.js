@@ -43,9 +43,11 @@ export const addWorkspaceAction = async(formData)=> {
 
 export const patchWorkspaceFavoriteAction = async(formData)=> {
   const favorite = formData.get("favorite");
+  const id = formData.get("id");
   console.log("favorite in patchWorkspaceFavoriteAction:", favorite);
 
   const res = await updateWorkspaceFavoriteById({
+    workspaceId: id,
     isFavorite: favorite
   });
 

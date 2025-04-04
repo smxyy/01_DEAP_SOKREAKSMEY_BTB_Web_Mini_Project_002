@@ -81,6 +81,7 @@ export async function updateWorkspaceFavoriteById({workspaceId, isFavorite}){
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const session = await auth();
+  console.log("isFavorite:", isFavorite);
 
   try {
     const res = await fetch(`${BASE_URL}/workspace/${workspaceId}/favorite?favorite=${isFavorite}`, {

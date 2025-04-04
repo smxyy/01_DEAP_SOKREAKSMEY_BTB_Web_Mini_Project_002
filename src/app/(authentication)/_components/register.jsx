@@ -4,13 +4,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { KeyRound, Mail, UserRound } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, {useActionState, useEffect} from "react";
+import { useRouter } from "next/navigation";
 import { registerAction } from '../../../../actions/signup-action';
 
 export default function RegisterComponent() {
+  const [state, formAction, isPending] = useActionState(registerAction, null);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state?.success) {
+      router.push("/login");
+    }
+  }, [state, router]);
+
   return (
     <form 
-    action={registerAction}
+    action={formAction}
     className="space-y-6">
       {/* username */}
       <div>
@@ -65,12 +75,13 @@ export default function RegisterComponent() {
 
       {/* sign in button */}
       <Button className="text-base cursor-pointer bg-persian-green text-white py-2.5 rounded-lg w-full font-bold">
-        Sign Up{" "}
+        {isPending ? "Loading" : "Sign Up"}
       </Button>
 
       {/* underline */}
       <div>
         <div className="border-b border-b-light-steel-blue"></div>
+        <div className="flex flex-col gap-2 py-2">
         <div className="text-right mt-2 font-normal">
           Already have an account?{" "}
           <Link
@@ -79,6 +90,8 @@ export default function RegisterComponent() {
           >
             Login
           </Link>
+        </div>
+        {state?.error && <p className="text-red-500 pt-2 text-center text-lg">{state.error}</p>}
         </div>
       </div>
 

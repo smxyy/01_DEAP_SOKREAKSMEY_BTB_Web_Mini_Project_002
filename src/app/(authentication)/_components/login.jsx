@@ -4,13 +4,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { KeyRound, Mail } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, {useActionState} from "react";
 import { loginAction } from '../../../../actions/login-action';
 
 export default function LoginComponent() {
+  const [state, formAction, isPending] = useActionState(loginAction, null);
   return (
     <form 
-        action = {loginAction}
+        action = {formAction}
         className="space-y-6 bg-white">
       {/* email */}
       <div>
@@ -51,20 +52,24 @@ export default function LoginComponent() {
         type="submit"
         className="text-base cursor-pointer bg-persian-green text-white py-2.5 rounded-lg w-full font-bold"
       >
-        Login
+        {isPending ? "Loading" : "Login"}
       </Button>
 
       {/* underline */}
       <div>
-        <div className="border-b border-b-light-steel-blue"></div>
-        <div className="capitalize text-right mt-2 font-normal">
-          create new accont?{" "}
-          <Link
-            href={"/register"}
-            className="hover:text-persian-green hover:underline"
-          >
-            Sign Up
-          </Link>
+        <div className="border-b border-b-light-steel-blue">
+        </div>
+        <div className="flex justify-between items-center">
+          {state?.error && <p className="text-red-500 pt-2">{state.error}</p>}
+          <div className="capitalize text-right mt-2 font-normal">
+            create new accont?{" "}
+            <Link
+              href={"/register"}
+              className="hover:text-persian-green hover:underline"
+            >
+              Sign Up
+            </Link>
+          </div>
         </div>
       </div>
 

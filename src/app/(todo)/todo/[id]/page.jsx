@@ -28,7 +28,7 @@ export default async function TodoIdPage({params}){
         <div className="flex justify-between ">
           <h2 className="text-2xl font-semibold">{res?.payload.workspaceName}</h2>
           {/* <Star1 size="26" color="var(--charcoal)"/> */}
-          <SetIsFavorite />
+          <SetIsFavorite wid={id} />
         </div>
         <div className="grid grid-cols-3 gap-14">
           <div>
